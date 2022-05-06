@@ -1,0 +1,20 @@
+{
+	"short_name": "NoteKake",
+	"name": "ノートかけ NoteKake",
+	"icons": [
+		{
+			"src": "/android-chrome-96x96.png",
+			"sizes": "96x96",
+			"type": "image/png"
+		},
+		{
+			"src": "/logo-favicon.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+}

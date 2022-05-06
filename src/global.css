@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Ubuntu+Mono:wght@400;700&family=Ubuntu:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+@layer base {
+	body {
+		@apply bg-notokake-light text-notokake-darker dark:bg-notokake-dark dark:text-notokake-light transition;
+	}
+	label {
+		@apply pl-1;
+	}
+	a {
+		@apply text-notokake-accent2 hover:text-notokake-accent2-lighter active:text-notokake-accent2-darker font-bold transition;
+	}
+}
+
+/* Input */
+@layer base {
+	input {
+		@apply bg-notokake-light text-notokake-darker dark:bg-notokake-dark dark:text-notokake-lighter border-2 border-notokake-dark/25 dark:border-notokake-light/25 hover:border-notokake-accent2/50 dark:hover:border-notokake-accent2-lighter/50 px-8 py-1 my-2 rounded-full outline-none focus:outline-none focus:border-notokake-accent2 dark:focus:border-notokake-accent2-lighter transition;
+	}
+	input.error {
+		@apply bg-notokake-accent dark:bg-notokake-accent text-notokake-light dark:text-notokake-light placeholder:text-notokake-light/50;
+	}
+}
+
+/* Button */
+@layer base {
+	button {
+		@apply w-fit h-fit my-4 rounded-xl;
+	}
+
+	button.btn-xs {
+		@apply px-2 py-1 text-xs;
+	}
+	button.btn-sm {
+		@apply px-4 py-1 text-sm;
+	}
+	button.btn-md {
+		@apply px-8 py-2 text-base;
+	}
+	button.btn-lg {
+		@apply px-16 py-2 text-lg;
+	}
+	button.btn-xl {
+		@apply px-32 py-2 text-xl;
+	}
+
+	button.btn-accent {
+		@apply bg-notokake-accent hover:bg-notokake-accent-lighter active:bg-notokake-accent-darker text-notokake-light transition disabled:bg-notokake-dark/25 disabled:dark:bg-notokake-light/25;
+	}
+	button.btn-accent2 {
+		@apply bg-notokake-accent2 hover:bg-notokake-accent2-lighter active:bg-notokake-accent2-darker text-notokake-light transition disabled:hover:bg-notokake-accent2 disabled:bg-notokake-dark/25 disabled:dark:bg-notokake-light/25;
+	}
+}
+
+/* Hamburger */
+@layer base {
+	.active > div:nth-child(1) {
+		@apply origin-top-left rotate-45;
+	}
+	.active > div:nth-child(2) {
+		@apply origin-left opacity-0;
+	}
+	.active > div:nth-child(3) {
+		@apply origin-bottom-left -rotate-45;
+	}
+}
+
+/* Toastify */
+.Toastify__toast-body {
+	white-space: pre-line;
+}
