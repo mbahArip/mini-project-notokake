@@ -21,7 +21,7 @@ import Footer from '../../components/Footer';
 import SignInput from '../../components/SignInput';
 import { MdEmail, MdPerson, MdLock } from 'react-icons/md';
 
-// TODO: Create default category and notes.
+// PASS: Create default category and notes.
 const Register = () => {
 	const navigate = useNavigate();
 	const registerToast = useRef(null);

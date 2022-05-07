@@ -14,6 +14,7 @@ import { LogoLong } from '../../Logo';
 import { MdSearch } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
+import Avatar from 'react-avatar';
 
 export const NavbarDesktop = ({ state, setState }) => {
 	const dispatch = useDispatch();
@@ -21,6 +22,7 @@ export const NavbarDesktop = ({ state, setState }) => {
 	const [changeTheme] = useSwitchTheme();
 	const { darkMode } = useSelector((state) => state.theme);
 	const userData = useSelector((state) => state.userData);
+	const { userSettings } = useSelector((state) => state.userData);
 
 	const dropdownMenu = [
 		{
@@ -35,8 +37,9 @@ export const NavbarDesktop = ({ state, setState }) => {
 		},
 	];
 
-	const [switchButton, setSwitchButton] = useState(false);
+	const [switchButton, setSwitchButton] = useState(darkMode);
 	const [searchQuery, setSearchQuery] = useState('');
+	const [debounceQuery, setDebounceQuery] = useState('');
 
 	const searchHandler = (e) => {
 		let { value } = e.target;
@@ -46,8 +49,8 @@ export const NavbarDesktop = ({ state, setState }) => {
 	// Search Query
 	useEffect(() => {
 		const delaySearch = setTimeout(() => {
-			console.log('Search: ', searchQuery);
-		}, 3000);
+			setDebounceQuery(searchQuery);
+		}, 1000);
 
 		return () => clearTimeout(delaySearch);
 	}, [searchQuery]);
@@ -61,14 +64,31 @@ export const NavbarDesktop = ({ state, setState }) => {
 	}, [userData]);
 
 	return (
-		<div className='col-span-full row-span-1 flex justify-between items-center py-4 px-8 bg-notokake-light dark:bg-notokake-dark drop-shadow-xl transition border-b border-b-notokake-darker/50 dark:border-b-notokake-light/50'>
+		<div className='col-span-full row-span-1 flex justify-between items-center py-4 px-8 bg-notokake-light dark:bg-notokake-dark drop-shadow-xl border-b border-b-notokake-darker/50 dark:border-b-notokake-light/50'>
 			<LogoLong className='h-full' onClick={changeTheme} />
 
-			<Input
-				properties={{ name: 'search', type: 'text', placeholder: 'Search posts', icon: MdSearch }}
-				autoComplete='off'
-				onChange={searchHandler}
-			/>
+			<div className='relative max-w-lg hidden group'>
+				<Input
+					properties={{ name: 'search', type: 'text', placeholder: 'Search posts', icon: MdSearch }}
+					autoComplete='off'
+					onChange={searchHandler}
+				/>
+				<div className='absolute w-full mt-2 transition-all duration-150'>
+					{debounceQuery.length > 0 ? (
+						<ul className='bg-notokake-light dark:bg-notokake-dark text-notokake-darker dark:text-notokake-light shadow-lg outline outline-1 outline-notokake-dark/25 dark:outline-notokake-light/25 rounded-lg overflow-hidden overflow-y-auto'>
+							<li>Lorem</li>
+							<li>Ipsum</li>
+							<li>Dolor</li>
+							<li>Sit</li>
+							<li>Amet</li>
+						</ul>
+					) : (
+						<div className='bg-notokake-light dark:bg-notokake-dark text-notokake-darker dark:text-notokake-light shadow-lg outline outline-1 outline-notokake-dark/25 dark:outline-notokake-light/25 rounded-lg overflow-hidden'>
+							Loading
+						</div>
+					)}
+				</div>
+			</div>
 
 			<div className='flex items-center gap-4'>
 				<button
@@ -87,19 +107,32 @@ export const NavbarDesktop = ({ state, setState }) => {
 						<MdDarkMode size={24} className={`transition ${!switchButton ? 'opacity-100 rotate-0' : ' opacity-0 rotate-180'}`} />
 					)}
 				</button>
-				<div className='relative inlin-block'>
-					<img
-						src='https://drive.mbaharip.me/api?path=/test.jpg&raw=true'
-						alt='avatar'
-						className='w-14 h-14 rounded-full bg-notokake-darker object-cover object-top cursor-pointer'
-						onClick={(e) => {
-							e.stopPropagation();
-							setState(!state);
-						}}
-					/>
+				<div className='relative inline-block'>
+					{userSettings?.avatar ? (
+						<img
+							src={userSettings?.avatar}
+							alt='avatar'
+							className='w-14 h-14 rounded-full bg-notokake-darker object-cover object-top cursor-pointer'
+							onClick={(e) => {
+								e.stopPropagation();
+								setState(!state);
+							}}
+						/>
+					) : (
+						<Avatar
+							name={userData.full_name}
+							size={56}
+							round={true}
+							className='w-14 h-14 rounded-full bg-notokake-darker object-cover object-top cursor-pointer'
+							onClick={(e) => {
+								e.stopPropagation();
+								setState(!state);
+							}}
+						/>
+					)}
 
 					<div
-						className={`absolute w-64 mt-2 right-0 transition-all duration-150 ${
+						className={`absolute w-64 mt-4 -right-4 transition-all duration-75 ${
 							state ? 'opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'
 						}`}
 						onClick={(e) => {
@@ -108,20 +141,34 @@ export const NavbarDesktop = ({ state, setState }) => {
 					>
 						<ul className='bg-notokake-light dark:bg-notokake-dark text-notokake-darker dark:text-notokake-light shadow-lg outline outline-1 outline-notokake-dark/25 dark:outline-notokake-light/25 rounded-lg overflow-hidden'>
 							<li className='inline-block relative w-full h-fit'>
-								<img
-									src='https://cdn.donmai.us/sample/fd/f8/__isekai_joucho_kamitsubaki_studio_drawn_by_misumigumi__sample-fdf801489198ad322b7f01d65dd9cff4.jpg'
-									alt='banner'
-									className='w-full h-16 object-cover'
-								/>
-								<div className='relative -top-8 -mb-8 select-none'>
-									<img
-										src='https://drive.mbaharip.me/api?path=/test.jpg&raw=true'
-										alt='avatar'
-										className='w-16 h-16 object-cover rounded-full mx-auto outline outline-4 outline-notokake-light dark:outline-notokake-dark'
-									/>
+								{userSettings?.banner ? (
+									<img src={userSettings?.banner} alt='banner' className='w-full h-16 object-cover' />
+								) : (
+									<div className='w-full h-16 bg-light dark:bg-dark' />
+								)}
+								<div className='relative -top-8 -mb-4 select-none flex flex-col '>
+									{userSettings?.avatar ? (
+										<img
+											src={userSettings?.avatar}
+											alt='avatar'
+											className='w-16 h-16 object-cover rounded-full mx-auto outline outline-4 outline-notokake-light dark:outline-notokake-dark'
+										/>
+									) : (
+										<Avatar
+											name={userData.full_name}
+											size={56}
+											round={true}
+											className='w-16 h-16 object-cover rounded-full mx-auto outline outline-4 outline-notokake-light dark:outline-notokake-dark'
+										/>
+									)}
 									<div className='w-full flex flex-col text-center'>
-										<span className='text-lg text-notokake-darker dark:text-notokake-lighter font-bold'>Username</span>
-										<span className='text-sm text-notokake-dark/75 dark:text-notokake-lighter/75'>email@notekake.com</span>
+										<span className='text-lg text-notokake-darker dark:text-notokake-lighter font-bold'>
+											{userData.full_name}
+										</span>
+										<span className='text-sm text-notokake-darker dark:text-notokake-lighter font-bold'>
+											@{userData.username}
+										</span>
+										<span className='text-sm text-notokake-dark/75 dark:text-notokake-lighter/75'>{userData.email}</span>
 									</div>
 								</div>
 							</li>

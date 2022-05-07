@@ -16,13 +16,13 @@ import './global.css';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));
 root.render(
-	<React.StrictMode>
-		<Provider store={store}>
-			<PersistGate loading={null} persistor={persistedStore}>
-				<ApolloProvider client={client}>
-					<App />
-				</ApolloProvider>
-			</PersistGate>
-		</Provider>
-	</React.StrictMode>,
+	// <React.StrictMode>
+	<Provider store={store}>
+		<PersistGate loading={null} persistor={persistedStore}>
+			<ApolloProvider client={client}>
+				<App />
+			</ApolloProvider>
+		</PersistGate>
+	</Provider>,
+	// </React.StrictMode>,
 );

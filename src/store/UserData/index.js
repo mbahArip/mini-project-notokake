@@ -12,5 +12,5 @@ export const userDataSlice = createSlice({
 });
 
 const { actions, reducer } = userDataSlice;
-export const { loginHandler, logoutHandler } = actions;
+export const { loginHandler, logoutHandler, addCategoryPin } = actions;
 export default reducer;
