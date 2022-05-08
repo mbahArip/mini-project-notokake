@@ -24,3 +24,17 @@ export const VIEW_NOTE = gql`
 		}
 	}
 `;
+
+export const UPDATE_CONTENT = gql`
+	mutation UPDATE_CONTENT($noteID: uuid!, $content: String!) {
+		update_notes(where: { uuid: { _eq: $noteID } }, _set: { content: $content, date_modified: "now()" }) {
+			returning {
+				uuid
+				title
+				date_created
+				content
+				tags
+			}
+		}
+	}
+`;

@@ -122,7 +122,8 @@ const Register = () => {
 		onCompleted: (data) => {
 			if (!data) return;
 			let defaultContent = `# Header\n\nLorem ipsum dolor sit amet\n\n## Sub header\n\nLong long long long paragraph;`;
-			createNote({ variables: { categoryUUID: data.insert_category.returning[0].uuid, content: defaultContent } });
+			console.log(data);
+			createNote({ variables: { catID: data.insert_category.returning[0].uuid, content: defaultContent } });
 		},
 		onError: (error) => {
 			toast.update(registerToast.current, {
@@ -136,6 +137,7 @@ const Register = () => {
 		onCompleted: (data) => {
 			if (!data) return;
 			setDisableButton(true);
+			console.log(data);
 			toast.update(registerToast.current, {
 				type: toast.TYPE.SUCCESS,
 				render: 'Success! Redirecting in 3 seconds...',

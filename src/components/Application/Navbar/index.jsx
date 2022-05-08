@@ -107,7 +107,7 @@ export const NavbarDesktop = ({ state, setState }) => {
 						<MdDarkMode size={24} className={`transition ${!switchButton ? 'opacity-100 rotate-0' : ' opacity-0 rotate-180'}`} />
 					)}
 				</button>
-				<div className='relative inline-block'>
+				<div className='relative inline-block select-none'>
 					{userSettings?.avatar ? (
 						<img
 							src={userSettings?.avatar}
@@ -121,7 +121,7 @@ export const NavbarDesktop = ({ state, setState }) => {
 					) : (
 						<Avatar
 							name={userData.full_name}
-							size={56}
+							size={'56px'}
 							round={true}
 							className='w-14 h-14 rounded-full bg-notokake-darker object-cover object-top cursor-pointer'
 							onClick={(e) => {

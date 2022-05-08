@@ -129,7 +129,7 @@ const Login = () => {
 	}, [input]);
 
 	useEffect(() => {
-		if (Object.keys(userData).length && tokenData) {
+		if (Object.keys(userData).length) {
 			navigate('/app');
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

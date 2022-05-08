@@ -35,7 +35,7 @@ const CategoryItem = ({ data, selectedState, ...rest }) => {
 				<span
 					className={`h-full w-full text-left px-4 py-1 rounded-full ${
 						data.uuid === selectedState
-							? 'bg-notokake-accent text-notokake-light'
+							? 'bg-notokake-accent-lighter dark:bg-notokake-accent text-notokake-light cursor-default'
 							: ' hover:bg-notokake-accent-lighter/25 text-notokake-darker dark:text-notokake-light hover:text-notokake-darker'
 					}`}
 				>
