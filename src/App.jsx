@@ -38,23 +38,11 @@ function App() {
 								<Application />
 							</ProtectedRoutes>
 						}
-					/>
-					<Route
-						path='/app/:categoryUUID'
-						element={
-							<ProtectedRoutes>
-								<Application />
-							</ProtectedRoutes>
-						}
-					/>
-					<Route
-						path='/app/:categoryUUID/:notesUUID'
-						element={
-							<ProtectedRoutes>
-								<Application />
-							</ProtectedRoutes>
-						}
-					/>
+					>
+						<Route path=':categoryUUID' element={<Application />}>
+							<Route path=':notesUUID' element={<Application />} />
+						</Route>
+					</Route>
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</BrowserRouter>

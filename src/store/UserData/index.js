@@ -8,9 +8,12 @@ export const userDataSlice = createSlice({
 	reducers: {
 		loginHandler: (state, { payload }) => payload,
 		logoutHandler: () => initialState,
+		updateUserDataHandler: (state, { payload }) => {
+			return { ...state, ...payload };
+		},
 	},
 });
 
 const { actions, reducer } = userDataSlice;
-export const { loginHandler, logoutHandler, addCategoryPin } = actions;
+export const { loginHandler, logoutHandler, updateUserDataHandler } = actions;
 export default reducer;

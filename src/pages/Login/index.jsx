@@ -152,7 +152,7 @@ const Login = () => {
 						Forgot password?
 					</Link>
 
-					<Button size='md' className='btn-accent' isLoading={loginLoading} disable={disableButton}>
+					<Button size='md' className='btn-accent mx-auto' isLoading={loginLoading} disable={disableButton}>
 						Login
 					</Button>
 					<p className='text-sm text-center my-1'>

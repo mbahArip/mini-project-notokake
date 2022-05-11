@@ -13,7 +13,7 @@ const NoteItem = ({ urlParams, data }) => {
 					: 'hover:bg-notokake-accent/25 '
 			}`}
 		>
-			<Link to={`/app/${urlParams.categoryUUID}/${data.uuid}`}>
+			<Link to={`/app/${data.category_uuid}/${data.uuid}`} className={'p-0 h-fit'}>
 				<div className='w-full flex justify-between items-center gap-2'>
 					<span
 						className={`${

@@ -16,21 +16,29 @@ import { Link } from 'react-router-dom';
 import { MdDarkMode, MdLightMode } from 'react-icons/md';
 import Avatar from 'react-avatar';
 
-export const NavbarDesktop = ({ state, setState }) => {
+export const NavbarDesktop = ({ dropDownState, userSettingsState }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [changeTheme] = useSwitchTheme();
 	const { darkMode } = useSelector((state) => state.theme);
 	const userData = useSelector((state) => state.userData);
-	const { userSettings } = useSelector((state) => state.userData);
+	const { user_settings: userSettings } = useSelector((state) => state.userData);
+
+	const { state: isDropdownOpen, setState: setIsDropdownOpen } = dropDownState;
+	const { state: isUserSettingsOpen, setState: setIsUserSettingsOpen } = userSettingsState;
 
 	const dropdownMenu = [
 		{
 			name: 'User Settings',
-			link: '/user-settings',
+			link: '#',
+			onClick: () => {
+				setIsDropdownOpen(false);
+				setIsUserSettingsOpen(!isUserSettingsOpen);
+			},
 		},
 		{
 			name: 'Logout',
+			link: '/',
 			onClick: () => {
 				dispatch(logoutHandler());
 			},
@@ -64,7 +72,7 @@ export const NavbarDesktop = ({ state, setState }) => {
 	}, [userData]);
 
 	return (
-		<div className='col-span-full row-span-1 flex justify-between items-center py-4 px-8 bg-notokake-light dark:bg-notokake-dark drop-shadow-xl border-b border-b-notokake-darker/50 dark:border-b-notokake-light/50'>
+		<div className='col-span-full row-span-1 flex justify-between items-center py-4 px-8 bg-notokake-light dark:bg-notokake-dark drop-shadow-xl border-b border-b-notokake-darker/50 dark:border-b-notokake-light/50 z-50'>
 			<LogoLong className='h-full' onClick={changeTheme} />
 
 			<div className='relative max-w-lg hidden group'>
@@ -108,14 +116,14 @@ export const NavbarDesktop = ({ state, setState }) => {
 					)}
 				</button>
 				<div className='relative inline-block select-none'>
-					{userSettings?.avatar ? (
+					{userData?.avatar ? (
 						<img
-							src={userSettings?.avatar}
+							src={userData?.avatar}
 							alt='avatar'
 							className='w-14 h-14 rounded-full bg-notokake-darker object-cover object-top cursor-pointer'
 							onClick={(e) => {
 								e.stopPropagation();
-								setState(!state);
+								setIsDropdownOpen(!isDropdownOpen);
 							}}
 						/>
 					) : (
@@ -126,14 +134,14 @@ export const NavbarDesktop = ({ state, setState }) => {
 							className='w-14 h-14 rounded-full bg-notokake-darker object-cover object-top cursor-pointer'
 							onClick={(e) => {
 								e.stopPropagation();
-								setState(!state);
+								setIsDropdownOpen(!isDropdownOpen);
 							}}
 						/>
 					)}
 
 					<div
 						className={`absolute w-64 mt-4 -right-4 transition-all duration-75 ${
-							state ? 'opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'
+							isDropdownOpen ? 'opacity-100 pointer-events-auto' : ' opacity-0 pointer-events-none'
 						}`}
 						onClick={(e) => {
 							e.stopPropagation();
@@ -147,9 +155,9 @@ export const NavbarDesktop = ({ state, setState }) => {
 									<div className='w-full h-16 bg-light dark:bg-dark' />
 								)}
 								<div className='relative -top-8 -mb-4 select-none flex flex-col '>
-									{userSettings?.avatar ? (
+									{userData?.avatar ? (
 										<img
-											src={userSettings?.avatar}
+											src={userData?.avatar}
 											alt='avatar'
 											className='w-16 h-16 object-cover rounded-full mx-auto outline outline-4 outline-notokake-light dark:outline-notokake-dark'
 										/>

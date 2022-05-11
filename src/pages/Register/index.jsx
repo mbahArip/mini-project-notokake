@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -21,7 +22,105 @@ import Footer from '../../components/Footer';
 import SignInput from '../../components/SignInput';
 import { MdEmail, MdPerson, MdLock } from 'react-icons/md';
 
-// PASS: Create default category and notes.
+const initialMarkdown = `
+# Welcome to Notekake
+
+You can write anything you need in here, wether it's about work, or school notes like materials or assignment or even anything you want.
+Through this note you can learn how to use this web app.
+
+## Table of Contents
+
+## Basic usage
+The view are splitted into 3 views:
+- Category
+- Notes
+- Content
+
+On Category view, you can add category or pin category you use daily.
+You can fill every category with notes.
+On Notes view, there a list of notes you've created on selected category.
+Here you can add new note, view note, or search notes by title.
+You can use <kbd>Ctrl</kbd>+<kbd>/</kbd> to access search bar immediately.
+On Content view, you can read, edit, or delete the note you've made.
+
+On the top right there are button for switching theme, and when you click the avatar, there will dropdown menu for user settings and logout.
+
+## Note Taking
+Notekake using markdown with github flavored for better view and use.
+There are couple feature from github markdown, like:
+
+### Table of Contents
+// eslint-disable-next-line no-useless-escape
+For creating table of contents, you can add h2 (\#\#) with Table of Contents as the title.
+It will automatically create table of contents based on all headers below it.
+
+### Text
+**Bold Text** - Add double asterisk before and after the text. (ex: \*\*Text\*\* )
+_Italic Text_ - Add underscore or asterisk before and after the text. (ex: \*Text\* or \_Text\_)
+~Strikethrough Text~ - Add tilde before and after the text. (ex. \~Text\~)
+
+### Math
+Notekake can render math equation thanks to KaTex.
+You can add dollar sign before and after the text to render it as math equiation.
+Example:
+$\pm \sqrt{a^2 + b^2} \newline
+Eq1 = 1.23 * 5^5 * 5.3 \newline
+Eq2 = 3.21 * 2^2 * 3.5$
+
+### Link or Image
+\[Alt Text\]\(Link\)
+
+With this format you can add link or image.
+For image add ! before the brackets.
+[mbahArip Github](https://www.github.com/mbaharip)
+![mbaharip](https://mbaharip-nextjs.vercel.app/_next/image?url=%2Fmain.svg&w=1080&q=75)
+
+Or combine both to create clickable image.
+[![mbaharip](https://img.shields.io/badge/Github-lightgrey?style=for-the-badge&logo=github)](https://www.github.com/mbaharip)
+
+### Checklist
+Create a list with extra bracket to create checklist.
+Add x inside the bracket to mark it as checked.
+
+- [ ] Checklist
+- [x] Checked
+
+### Table
+| Or | even | table |
+|:---:|:---:|:---:|
+|It the same | Like | Github Table|
+
+
+### Code block
+Blockcode by adding triple backtick before and after the code.
+example:
+\`\`\`jsx
+import React from 'react';
+
+const App = () => {
+  return (
+    <div>Return this element.</div>
+  )
+}
+
+export default App;
+\`\`\`
+
+### HTML Element
+You can also write direct html element inside the note and it will automatically render it.
+For example if you want to align center a element:
+<p align='center' style='font-weight:bold'>
+  Centered Text
+</p>
+
+## Footer
+
+Thank you for using notekake, you can find me here:
+[Facebook](https://www.facebook.com/mbaharip07)
+[Github](https://www.github.com/mbaharip)
+[Twitter](https://www.twitter.com/mbaharip_)
+`;
+
 const Register = () => {
 	const navigate = useNavigate();
 	const registerToast = useRef(null);
@@ -121,7 +220,7 @@ const Register = () => {
 	const [createCategory, { loading: categoryLoading }] = useMutation(NEW_USER_COLLECTION, {
 		onCompleted: (data) => {
 			if (!data) return;
-			let defaultContent = `# Header\n\nLorem ipsum dolor sit amet\n\n## Sub header\n\nLong long long long paragraph;`;
+			let defaultContent = initialMarkdown;
 			console.log(data);
 			createNote({ variables: { catID: data.insert_category.returning[0].uuid, content: defaultContent } });
 		},
@@ -288,7 +387,7 @@ const Register = () => {
 						{/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 						With registering you are agree to our <a href='#'>Terms of Use</a> and <a href='#'>Privacy Policy</a>.
 					</p>
-					<Button size='md' className='btn-accent' isLoading={loadingButton} disable={disableButton}>
+					<Button size='md' className='btn-accent mx-auto' isLoading={loadingButton} disable={disableButton}>
 						Join
 					</Button>
 					<p className='text-sm text-center my-1'>

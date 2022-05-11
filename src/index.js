@@ -12,7 +12,7 @@ import { ApolloProvider } from '@apollo/client';
 import client from './utils/apolloClient';
 
 // Style
-import './markdown-github.css';
+import './styles/markdown-github.css';
 import './global.css';
 
 const root = ReactDOM.createRoot(document.getElementById('app'));

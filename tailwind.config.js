@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const svgToDataUri = require('mini-svg-data-uri');
 
 module.exports = {
 	darkMode: 'class',
@@ -38,6 +39,12 @@ module.exports = {
 			backgroundImage: {
 				dark: 'url("./assets/background/bg-dark.png")',
 				light: 'url("./assets/background/bg-light.png")',
+				'select-light': `url("${svgToDataUri(
+					`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`,
+				)}")`,
+				'select-dark': `url("${svgToDataUri(
+					`<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="#192530" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`,
+				)}")`,
 			},
 		},
 	},

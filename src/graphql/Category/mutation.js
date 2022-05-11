@@ -33,3 +33,14 @@ export const UPDATE_PIN = gql`
 		}
 	}
 `;
+
+export const DELETE_CATEGORY = gql`
+	mutation DELETE_CATEGORY($uuid: uuid!) {
+		delete_category(where: { uuid: { _eq: $uuid } }) {
+			returning {
+				uuid
+				name
+			}
+		}
+	}
+`;

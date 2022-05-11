@@ -30,11 +30,7 @@ const Button = ({ isLoading = false, size = 'md', className, disable = false, ch
 			buttonSize = 'btn-md';
 	}
 	return (
-		<button
-			className={`${buttonSize} bg-notokake-accent text-notokake-light mx-auto ${className}`}
-			disabled={isLoading ? true : false || disable}
-			{...rest}
-		>
+		<button className={`${buttonSize} btn-accent ${className}`} disabled={isLoading ? true : false || disable} {...rest}>
 			{isLoading ? <ReactLoading type='bubbles' color='#fff' height={24} width={24} /> : <>{children}</>}
 		</button>
 	);
