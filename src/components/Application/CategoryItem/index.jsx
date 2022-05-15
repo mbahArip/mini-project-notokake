@@ -2,7 +2,8 @@ import { useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserDataHandler } from '../../../store/UserData';
 
 // GraphQL
 import { useMutation } from '@apollo/client';
@@ -16,8 +17,10 @@ import { VscPin, VscClose, VscTrash } from 'react-icons/vsc';
 // PASS: Pin Loading
 const CategoryItem = ({ data, selectedState, ...rest }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const { categoryUUID } = useParams();
 	const { darkMode } = useSelector((state) => state.theme);
+	const { user_settings: userSettings } = useSelector((state) => state.userData);
 
 	const [updatePin, { loading: pinLoading }] = useMutation(UPDATE_PIN, {
 		refetchQueries: ['GET_CATEGORIES'],
@@ -40,6 +43,7 @@ const CategoryItem = ({ data, selectedState, ...rest }) => {
 				autoClose: 1000,
 			});
 			if (categoryUUID === selectedState) {
+				dispatch(updateUserDataHandler({ user_settings: { ...userSettings, defaultCategory: null } }));
 				navigate('/app');
 			}
 		},
