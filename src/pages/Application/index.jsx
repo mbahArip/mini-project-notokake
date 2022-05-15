@@ -871,8 +871,15 @@ const Application = () => {
 									});
 									userUpdateSettings({ variables: { settings: { defaultCategory: e.target.value } } });
 								}}
-								value={userSettings.defaultCategory || categoriesData?.category[0].uuid}
+								value={
+									userSettings?.defaultCategory
+										? userSettings.defaultCategory
+										: categoriesData?.category.length
+										? categoriesData.category[0].uuid
+										: ''
+								}
 							>
+								<option value=''>Select default category</option>
 								{categoriesData?.category.map((category) => (
 									<option value={category.uuid} key={category.uuid}>
 										{category.name}
