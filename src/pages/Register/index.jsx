@@ -128,6 +128,7 @@ const Register = () => {
 	const userData = useSelector((state) => state.userData);
 
 	const NAME_REGEX = /^[A-Za-z\s]{1,}[.]{0,1}[A-Za-z\s]{0,}$/;
+	const USERNAME_REGEX = /^[A-Za-z0-9_]{1,}$/;
 	const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,64}$/;
 	const PASSWORD_CONTAINS_REGEX = {
 		lowercase: /^(?=.*[a-z]).+$/,
@@ -155,7 +156,7 @@ const Register = () => {
 			label: 'Full name : ',
 			error: error.name,
 			type: 'text',
-			placeholder: 'ex. John Smith',
+			placeholder: 'Full name',
 			autoComplete: 'off',
 			icon: MdPerson,
 		},
@@ -164,7 +165,7 @@ const Register = () => {
 			label: 'Username : ',
 			error: error.username,
 			type: 'text',
-			placeholder: 'ex. johnsmith',
+			placeholder: 'Username',
 			autoComplete: 'off',
 			icon: MdPerson,
 		},
@@ -173,7 +174,7 @@ const Register = () => {
 			label: 'Email : ',
 			error: error.email,
 			type: 'email',
-			placeholder: 'ex. johnsmith@notekake.com',
+			placeholder: 'Email',
 			autoComplete: 'off',
 			icon: MdEmail,
 		},
@@ -182,7 +183,7 @@ const Register = () => {
 			label: 'Password : ',
 			error: error.password,
 			type: 'password',
-			placeholder: 'Strong password no one can guess',
+			placeholder: 'Password',
 			autoComplete: 'off',
 			icon: MdLock,
 		},
@@ -191,7 +192,7 @@ const Register = () => {
 			label: 'Confirm password : ',
 			error: error.confirm,
 			type: 'password',
-			placeholder: 'Confirm your password',
+			placeholder: 'Confirm password',
 			autoComplete: 'off',
 			icon: MdLock,
 		},
@@ -269,6 +270,8 @@ const Register = () => {
 		if (name === 'username') {
 			if (value.length < 5) {
 				setError({ ...error, username: 'Username must be at least 5 characters' });
+			} else if (!USERNAME_REGEX.test(value)) {
+				setError({ ...error, username: 'Invalid username' });
 			} else {
 				setError({ ...error, username: '' });
 			}
