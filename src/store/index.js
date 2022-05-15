@@ -5,9 +5,8 @@ import storage from 'redux-persist/lib/storage';
 // Reducer
 import themeReducer from './Theme';
 import userDataReducer from './UserData';
-import draftReducer from './EditorDraft';
 
-const reducer = combineReducers({ theme: themeReducer, userData: userDataReducer, draft: draftReducer });
+const reducer = combineReducers({ theme: themeReducer, userData: userDataReducer });
 
 const persistConfig = {
 	key: 'notokake',

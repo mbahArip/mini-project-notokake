@@ -10,6 +10,7 @@ import { store, persistedStore } from './store';
 // Library
 import { ApolloProvider } from '@apollo/client';
 import client from './utils/apolloClient';
+import * as serviceWorkerRegistration from './utils/serviceWorker_Registration';
 
 // Style
 import './styles/markdown-github.css';
@@ -27,3 +28,5 @@ root.render(
 	</Provider>,
 	// </React.StrictMode>,
 );
+
+serviceWorkerRegistration.register();
