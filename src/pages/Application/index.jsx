@@ -400,7 +400,7 @@ const Application = () => {
 
 	useEffect(() => {
 		window.addEventListener('keydown', (e) => {
-			if (e.key.toLowerCase() === '/' && e.ctrlKey) {
+			if (e.key.toLowerCase() === 'k' && e.ctrlKey) {
 				searchRef.current.focus();
 			}
 		});
@@ -514,7 +514,7 @@ const Application = () => {
 							className='pr-20'
 						/>
 						<div className='absolute right-8 text-sm'>
-							<kbd>Ctrl</kbd> + <kbd>/</kbd>
+							<kbd>Ctrl</kbd> + <kbd>k</kbd>
 						</div>
 					</div>
 
