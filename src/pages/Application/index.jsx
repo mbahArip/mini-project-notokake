@@ -610,9 +610,6 @@ const Application = () => {
 										onChange={(e) => {
 											// setSelectedNotes({ ...selectedNotes, content: e });
 											setEditedNote({ ...editedNote, content: e });
-											if (preview.current && editor.current) {
-												preview.current.scrollTop = editor.current.scrollTop;
-											}
 										}}
 									/>
 								</div>
