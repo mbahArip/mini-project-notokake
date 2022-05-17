@@ -40,7 +40,7 @@ On Category view, you can add category or pin category you use daily.
 You can fill every category with notes.
 On Notes view, there a list of notes you've created on selected category.
 Here you can add new note, view note, or search notes by title.
-You can use <kbd>Ctrl</kbd>+<kbd>/</kbd> to access search bar immediately.
+You can use <kbd>Ctrl</kbd>+<kbd>k</kbd> to access search bar immediately.
 On Content view, you can read, edit, or delete the note you've made.
 
 On the top right there are button for switching theme, and when you click the avatar, there will dropdown menu for user settings and logout.
@@ -63,8 +63,8 @@ _Italic Text_ - Add underscore or asterisk before and after the text. (ex: \*Tex
 Notekake can render math equation thanks to KaTex.
 You can add dollar sign before and after the text to render it as math equiation.
 Example:
-$\pm \sqrt{a^2 + b^2} \newline
-Eq1 = 1.23 * 5^5 * 5.3 \newline
+$\\pm \\sqrt{a^2 + b^2} \\newline
+Eq1 = 1.23 * 5^5 * 5.3 \\newline
 Eq2 = 3.21 * 2^2 * 3.5$
 
 ### Link or Image
