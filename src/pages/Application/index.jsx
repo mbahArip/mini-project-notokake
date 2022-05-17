@@ -129,8 +129,8 @@ const Application = () => {
 
 	const searchHandler = (e) => {
 		let { value } = e.target;
-		setIsSearching(true);
 		if (value === '') return setIsSearching(false);
+		setIsSearching(true);
 		setSearchQuery(value);
 	};
 
@@ -505,6 +505,7 @@ const Application = () => {
           Notes
         */}
 				<div className='col-span-2 row-[span_11_/_span_11] bg-notokake-light/80 dark:bg-notokake-dark/80 border-r border-r-notokake-darker/50 dark:border-r-notokake-light/50 overflow-y-auto'>
+					{/* Search */}
 					<div className='w-full px-4 relative flex items-center justify-center'>
 						<Input
 							properties={{ name: 'inputSearch', type: 'text', placeholder: 'Search Notes', icon: VscSearch }}
@@ -520,6 +521,7 @@ const Application = () => {
 
 					<div className='w-3/4 h-[1px] bg-notokake-dark/50 dark:bg-notokake-light/50 rounded-full my-2 mx-auto' />
 
+					{/* New note button */}
 					<button
 						className='w-full m-0 p-0 rounded-none py-2 flex items-center justify-center gap-2 hover:bg-notokake-accent/25 text-notokake-darker dark:text-notokake-light'
 						onClick={() => {
@@ -533,6 +535,7 @@ const Application = () => {
 						New note <VscAdd />
 					</button>
 
+					{/* Is searching? */}
 					{isSearching ? (
 						<div className='w-full'>
 							{searchResult.length && !searchLoading ? (
